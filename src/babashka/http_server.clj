@@ -149,8 +149,10 @@
                str)}))
 
 (defn- body [path]
-  {:headers {"Content-Type" (ext-mime-type (fs/file-name path))}
-   :body (fs/file path)})
+  {:headers {"Content-Type"                 (ext-mime-type (fs/file-name path))
+             "Cross-Origin-Opener-Policy"   "same-origin"
+             "Cross-Origin-Embedder-Policy" "require-corp"}
+   :body    (fs/file path)})
 
 (defn serve
   "Serves static assets using web server.
